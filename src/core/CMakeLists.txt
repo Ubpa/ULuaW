@@ -15,4 +15,6 @@ Ubpa_AddTarget(
     "${PROJECT_SOURCE_DIR}/include"
   LIB
     Ubpa::ULua_core
+  C_OPTION_PRIVATE
+    ${c_options}
 )
