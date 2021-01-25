@@ -6,9 +6,11 @@ namespace Ubpa {
     class LuaStateView {
     public:
 
+        LuaStateView() : L{ nullptr } {}
         LuaStateView(lua_State* L) : L{ L } {}
 
         lua_State* GetState() { return L; }
+        bool Valid() const { return L != nullptr; }
         operator lua_State* () { return L; }
 
         int absindex(int idx);
