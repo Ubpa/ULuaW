@@ -1,3 +1,12 @@
+set(c_options "")
+if(MSVC)
+  list(APPEND c_options "/wd4309")
+elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+  #
+elseif("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+  #
+endif()
+
 Ubpa_AddTarget(
   MODE STATIC
   SOURCE
