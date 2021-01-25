@@ -6,18 +6,10 @@ namespace Ubpa {
     class LuaStateView {
     public:
 
-        //
-        // Constructor
-        ////////////////
-
         LuaStateView(lua_State* L) : L{ L } {}
 
         lua_State* GetState() { return L; }
         operator lua_State* () { return L; }
-
-        //
-        // Lua raw API
-        ////////////////
 
         int absindex(int idx);
         void arith(int op);

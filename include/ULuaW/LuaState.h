@@ -7,11 +7,6 @@
 namespace Ubpa {
     class LuaState : public LuaStateView {
     public:
-
-        //
-        // Constructor
-        ////////////////
-
         LuaState();
         LuaState(lua_Alloc f, void* userdata);
         LuaState(std::shared_ptr<lua_State> main, LuaStateView L);
