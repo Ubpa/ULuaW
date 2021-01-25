@@ -35,18 +35,18 @@ static void stackDump(LuaStateView L) {
 int main() {
 	LuaState L;
 
-	L.pushboolean(1);
-	L.pushnumber(10);
-	L.pushnil();
-	L.pushstring("hello");
+	L->pushboolean(1);
+	L->pushnumber(10);
+	L->pushnil();
+	L->pushstring("hello");
 
 	stackDump(L); /* will print: true 10 nil 'hello' */
-	L.pushvalue(-4); stackDump(L); /* will print: true 10 nil 'hello' true */
-	L.replace(3); stackDump(L); /* will print: true 10 true 'hello' */
-	L.settop(6); stackDump(L); /* will print: true 10 true 'hello' nil nil */
-	L.rotate(3, 1); stackDump(L); /* will print: true 10 nil true 'hello' nil */
-	L.remove(-3); stackDump(L); /* will print: true 10 nil 'hello' nil */
-	L.settop(-5); stackDump(L); /* will print: true */
+	L->pushvalue(-4); stackDump(L); /* will print: true 10 nil 'hello' true */
+	L->replace(3); stackDump(L); /* will print: true 10 true 'hello' */
+	L->settop(6); stackDump(L); /* will print: true 10 true 'hello' nil nil */
+	L->rotate(3, 1); stackDump(L); /* will print: true 10 nil true 'hello' nil */
+	L->remove(-3); stackDump(L); /* will print: true 10 nil 'hello' nil */
+	L->settop(-5); stackDump(L); /* will print: true */
 
 	return 0;
 }
