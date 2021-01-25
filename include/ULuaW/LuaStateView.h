@@ -13,7 +13,6 @@ namespace Ubpa {
         LuaStateView(lua_State* L) : L{ L } {}
 
         lua_State* GetState() { return L; }
-        LuaStateView* operator->() { return this; }
         operator lua_State* () { return L; }
 
         //
@@ -178,7 +177,7 @@ namespace Ubpa {
         void unref(int t, int ref);
         void where(int lvl);
 
-    private:
+    protected:
         lua_State* L;
     };
 }
