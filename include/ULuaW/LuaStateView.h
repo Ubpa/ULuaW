@@ -1,30 +1,19 @@
 #pragma once
 
-#include "LuaStateView.h"
-
-#include <memory>
+#include <lua.hpp>
 
 namespace Ubpa {
-    class LuaState {
+    class LuaStateView {
     public:
 
         //
         // Constructor
         ////////////////
 
-        LuaState();
-        LuaState(lua_Alloc f, void* userdata);
-        LuaState(std::shared_ptr<lua_State> L, std::shared_ptr<lua_State> main);
-        LuaState(std::shared_ptr<lua_State> L);
+        LuaStateView(lua_State* L) : L{ L } {}
 
-        std::shared_ptr<lua_State> GetSharedState()     { return L;          }
-        std::shared_ptr<lua_State> GetSharedMainState() { return main;       }
-        lua_State*                 GetState()           { return L.get();    }
-        lua_State*                 GetMainState()       { return main.get(); }
-        LuaStateView               View()               { return L.get();    }
-        LuaStateView               MainView()           { return L.get();    }
+        lua_State* GetState() { return L; }
 
-        operator LuaStateView() { return View(); }
         //
         // Lua raw API
         ////////////////
@@ -76,7 +65,6 @@ namespace Ubpa {
         void len(int index);
         int load(lua_Reader reader, void* data, const char* chunkname, const char* mode);
         void newtable();
-        LuaState newthread();
         void* newuserdata(size_t size);
         int next(int index);
         int pcall(int nargs, int nresults, int msgh);
@@ -189,7 +177,6 @@ namespace Ubpa {
         void where(int lvl);
 
     private:
-        std::shared_ptr<lua_State> L;
-        std::shared_ptr<lua_State> main;
+        lua_State* L;
     };
 }
