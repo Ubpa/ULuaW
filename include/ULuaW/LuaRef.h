@@ -5,8 +5,10 @@
 namespace Ubpa {
 	class LuaRef {
 	public:
+		LuaRef() noexcept : t{ 0 }, ref{ LUA_REFNIL }{}
 		LuaRef(LuaStateView L, int t) : L{ L }, t{ t } { ref = L.ref(t); }
 		LuaRef(LuaStateView L) : LuaRef{ L, LUA_REGISTRYINDEX } {}
+		LuaStateView GetView() const noexcept { return L; }
 		bool IsNil() const noexcept { return ref == LUA_REFNIL; }
 		int Get() { return L.rawgeti(t, ref); }
 		~LuaRef() {
@@ -14,6 +16,11 @@ namespace Ubpa {
 				return;
 			L.unref(t, ref);
 		}
+		LuaRef(LuaRef&& rhs) noexcept : L{ rhs.L }, t{ rhs.t }, ref{ rhs.ref }
+		{ rhs.L = LuaStateView{}; rhs.t = 0; rhs.ref = LUA_REFNIL; }
+		LuaRef(const LuaRef&) = delete;
+		LuaRef& operator=(const LuaRef&) = delete;
+		LuaRef& operator=(LuaRef&& rhs) noexcept { std::swap(*this, rhs); return *this; }
 	private:
 		LuaStateView L;
 		int t;

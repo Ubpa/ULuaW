@@ -6,8 +6,8 @@ namespace Ubpa {
     class LuaStateView {
     public:
 
-        LuaStateView() : L{ nullptr } {}
-        LuaStateView(lua_State* L) : L{ L } {}
+        LuaStateView() noexcept : L{ nullptr } {}
+        LuaStateView(lua_State* L) noexcept : L{ L } {}
 
         lua_State* GetState() { return L; }
         bool Valid() const { return L != nullptr; }
