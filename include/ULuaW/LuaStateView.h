@@ -153,8 +153,10 @@ namespace Ubpa {
         int loadfile(const char* filename);
         int loadfilex(const char* filename, const char* mode);
         int loadstring(const char* s);
-        void newlib(const luaL_Reg l[]);
-        void newlibtable(const luaL_Reg l[]);
+        template<size_t N>
+        void newlib(const luaL_Reg (&l)[N]);
+        template<size_t N>
+        void newlibtable(const luaL_Reg (&l)[N]);
         int newmetatable(const char* tname);
         void openlibs();
         lua_Integer optinteger(int arg, lua_Integer d);
@@ -175,3 +177,10 @@ namespace Ubpa {
         lua_State* L;
     };
 }
+
+// ==========================
+
+template<size_t N>
+void Ubpa::LuaStateView::newlib(const luaL_Reg(&l)[N]) { luaL_newlib(L, l); }
+template<size_t N>
+void Ubpa::LuaStateView::newlibtable(const luaL_Reg(&l)[N]) { luaL_newlibtable(L, l); }

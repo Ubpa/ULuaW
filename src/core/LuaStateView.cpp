@@ -156,8 +156,6 @@ int LuaStateView::loadbufferx(const char* buff, size_t sz, const char* name, con
 int LuaStateView::loadfile(const char* filename) { return luaL_loadfile(L, filename); }
 int LuaStateView::loadfilex(const char* filename, const char* mode) { return luaL_loadfilex(L, filename, mode); }
 int LuaStateView::loadstring(const char* s) { return luaL_loadstring(L, s); }
-void LuaStateView::newlib(const luaL_Reg l[]) { luaL_newlib(L, l); }
-void LuaStateView::newlibtable(const luaL_Reg l[]) { luaL_newlibtable(L, l); }
 int LuaStateView::newmetatable(const char* tname) { return luaL_newmetatable(L, tname); }
 void LuaStateView::openlibs() { return luaL_openlibs(L); }
 lua_Integer LuaStateView::optinteger(int arg, lua_Integer d) { return luaL_optinteger(L, arg, d); }
