@@ -20,7 +20,12 @@ namespace Ubpa {
 		{ rhs.L = LuaStateView{}; rhs.t = 0; rhs.ref = LUA_REFNIL; }
 		LuaRef(const LuaRef&) = delete;
 		LuaRef& operator=(const LuaRef&) = delete;
-		LuaRef& operator=(LuaRef&& rhs) noexcept { std::swap(*this, rhs); return *this; }
+		LuaRef& operator=(LuaRef&& rhs) noexcept {
+			std::swap(L, rhs.L);
+			std::swap(t, rhs.t);
+			std::swap(ref, rhs.ref);
+			return *this;
+		}
 	private:
 		LuaStateView L;
 		int t;
